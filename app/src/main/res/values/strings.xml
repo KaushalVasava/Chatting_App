@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Chatting App</string>
-    <string name="api_key">API_KEY</string>
     <string name="username">Username</string>
     <string name="go">GO</string>
     <string name="chat_app">Chat App</string>
@@ -13,4 +12,5 @@
     <string name="channels">Channels</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="min_4_char_allow">* Minimum 4 Characters Allowed</string>
 </resources>

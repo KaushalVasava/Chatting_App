@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.kaushalvasava.org.apps.chattingapp.model.ChatUser
 import com.google.android.material.textfield.TextInputLayout
+import com.kaushalvasava.org.apps.chattingapp.R
 import com.kaushalvasava.org.apps.chattingapp.databinding.FragmentLoginBinding
+import com.kaushalvasava.org.apps.chattingapp.ui.MainActivity
 
 class LoginFragment : Fragment() {
 
@@ -37,10 +39,10 @@ class LoginFragment : Fragment() {
             validateInput(username, binding.usernameInputLayout)
         ) {
             val chatUser = ChatUser(firstName, username)
-            requireContext().getSharedPreferences("USERS_DATA", Context.MODE_PRIVATE).edit().apply {
-                putBoolean("logged", true)
-                putString("userName", firstName)
-                putString("userId", username)
+            requireContext().getSharedPreferences(MainActivity.USER_SHARED_PREF, Context.MODE_PRIVATE).edit().apply {
+                putBoolean(MainActivity.LOGIN_STATUS_KEY, true)
+                putString(MainActivity.USER_NAME_KEY, firstName)
+                putString(MainActivity.USER_ID_KEY, username)
                 apply()
             }
             val action = LoginFragmentDirections.actionLoginFragmentToChannelFragment(chatUser)
@@ -51,7 +53,7 @@ class LoginFragment : Fragment() {
     private fun validateInput(inputText: String, textInputLayout: TextInputLayout): Boolean {
         return if (inputText.length < 3) {
             textInputLayout.isErrorEnabled = true
-            textInputLayout.error = "* Minimum 4 Characters Allowed"
+            textInputLayout.error = getString(R.string.min_4_char_allow)
             false
         } else {
             textInputLayout.isErrorEnabled = false

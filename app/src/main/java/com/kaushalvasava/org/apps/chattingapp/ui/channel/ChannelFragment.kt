@@ -145,6 +145,7 @@ class ChannelFragment : Fragment() {
                     }
             }
         }
+
     private fun setupDrawer() {
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             if (menuItem.itemId == R.id.logout_menu) {
@@ -161,7 +162,7 @@ class ChannelFragment : Fragment() {
         val headerName = headerView.findViewById<TextView>(R.id.name_textView)
         headerName.text = currentUser.name
         headerAvatar.setOnClickListener {
-            selectImageFromGalleryResult.launch("image/*")
+            selectImageFromGalleryResult.launch(IMAGE_MIME_TYPE)
         }
     }
 
@@ -199,6 +200,10 @@ class ChannelFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val IMAGE_MIME_TYPE = "image/*"
     }
 }
 

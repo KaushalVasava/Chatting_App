@@ -23,14 +23,14 @@ class MainActivity : AppCompatActivity() {
 
         if (navController.currentDestination?.label.toString().contains("login")) {
             val currentUser = client.getCurrentUser()
-            val pref = getSharedPreferences("USERS_DATA", MODE_PRIVATE)
-            val userAlreadyExist = pref.getBoolean("logged", false)
+            val pref = getSharedPreferences(USER_SHARED_PREF, MODE_PRIVATE)
+            val userAlreadyExist = pref.getBoolean(LOGIN_STATUS_KEY, false)
             if (userAlreadyExist) {
                 val user = if (currentUser != null) {
                     ChatUser(currentUser.name, currentUser.id)
                 } else {
-                    val userName = pref.getString("userName", "").toString()
-                    val userId = pref.getString("userId", "").toString()
+                    val userName = pref.getString(USER_NAME_KEY, "").toString()
+                    val userId = pref.getString(USER_ID_KEY, "").toString()
                     ChatUser(userName, userId)
                 }
                 val action = LoginFragmentDirections.actionLoginFragmentToChannelFragment(user)
@@ -38,5 +38,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    companion object SharedPref {
+        const val USER_SHARED_PREF = "users_data"
+        const val USER_ID_KEY = "user_id"
+        const val USER_NAME_KEY = "user_name"
+        const val LOGIN_STATUS_KEY = "logged"
     }
 }
