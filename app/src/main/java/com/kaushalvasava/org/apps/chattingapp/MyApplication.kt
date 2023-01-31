@@ -10,7 +10,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val client =
-            ChatClient.Builder(getString(R.string.api_key), this).logLevel(ChatLogLevel.ALL).build()
+            ChatClient.Builder(BuildConfig.API_KEY, this).logLevel(ChatLogLevel.ALL).build()
         ChatDomain.Builder(client, this).build()
     }
 }
